@@ -8,4 +8,6 @@ TextView:
 Section 2 Lesson 12
 	oncreate() methodu activity_main.xml yaratıldığında çalıştırılır.
 	
+
+	
 	
