@@ -105,11 +105,11 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (listAddresses.get(0).getLocality() != null) {
-                    address += listAddresses.get(0).getLocality();
+                    address += listAddresses.get(0).getLocality() + " ";
                 }
 
                 if (listAddresses.get(0).getPostalCode() != null) {
-                    address += listAddresses.get(0).getPostalCode();
+                    address += listAddresses.get(0).getPostalCode() + " ";
                 }
 
                 if (listAddresses.get(0).getAdminArea() != null) {
@@ -121,5 +121,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        addressTextView.setText(address);
     }
 }
