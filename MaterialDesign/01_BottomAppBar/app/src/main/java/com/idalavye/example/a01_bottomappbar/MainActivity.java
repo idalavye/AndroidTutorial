@@ -2,19 +2,25 @@ package com.idalavye.example.a01_bottomappbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 
 import java.util.ArrayList;
 
@@ -23,20 +29,25 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private CustomAdapter customAdapter;
 
+
     private BottomAppBar bar;
+    private TextView tw_newWord;
     private Switch aSwitch;
     private boolean fbModeCenter = true;
     private FloatingActionButton fab;
+
 
     public static final String TEXT = "TEXT";
     public static final String AUDIO = "AUDIO";
     public static final String IMAGE = "IMAGE";
     public static final String VIDEO = "VIDEO";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         init();
 
@@ -58,7 +69,14 @@ public class MainActivity extends AppCompatActivity {
                     bar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_END);
                     fab.setImageResource(R.drawable.ic_arrow);
                     fbModeCenter = false;
+                    listView.setVisibility(View.GONE);
+
+//                    Intent intent = new Intent(getApplicationContext(), CreateNewActivity.class);
+//                    startActivity(intent);
                 } else {
+                    Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
+                    listView.startAnimation(animation);
+                    listView.setVisibility(View.VISIBLE);
                     bar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_CENTER);
                     fab.setImageResource(R.drawable.ic_add_black_24dp);
                     fbModeCenter = true;
@@ -82,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), "Position : " + position, Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     public boolean addPhoto(MenuItem menuItem) {
@@ -99,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+        this.tw_newWord = findViewById(R.id.tw_newWord);
         this.bar = findViewById(R.id.bar);
         setSupportActionBar(bar);
         this.aSwitch = findViewById(R.id.switch1);

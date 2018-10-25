@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ public class CustomAdapter extends ArrayAdapter<ObjetoListView> {
 
     private Activity activity;
     private ArrayList<ObjetoListView> arrayList;
+    private int lastPosition = -1;
 
 
     public CustomAdapter(Activity activity, ArrayList<ObjetoListView> arrayList) {
@@ -53,8 +56,7 @@ public class CustomAdapter extends ArrayAdapter<ObjetoListView> {
         txtMessage.setText(arrayList.get(position).getMessage());
         txtDate.setText(arrayList.get(position).getDate());
 
-        System.out.println("**************"+ txtMessage.getText().toString());
-
+        System.out.println("**************" + txtMessage.getText().toString());
 
 
         String lastMessage = arrayList.get(position).getLastMessges();
@@ -94,6 +96,17 @@ public class CustomAdapter extends ArrayAdapter<ObjetoListView> {
             txtDate.setTextColor(Color.GRAY);
             txtBadgeNotification.setVisibility(View.GONE);
         }
+
+        //Animation
+        Animation animation = AnimationUtils.loadAnimation(activity, android.R.anim.slide_in_left);
+        convertView.startAnimation(animation);
+
+        /*
+        Animation animation = AnimationUtils.loadAnimation(activity,
+                (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
+        convertView.startAnimation(animation);
+        lastPosition = position;
+    */
 
         return convertView;
     }
