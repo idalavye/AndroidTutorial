@@ -1,6 +1,7 @@
 package com.idalavye.example.a01_bottomappbar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 
 import android.content.Intent;
@@ -20,18 +21,17 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView listView;
-    private CustomAdapter customAdapter;
-
+    //private ListView listView;
+    //private CustomAdapter customAdapter;
 
     private BottomAppBar bar;
-    private TextView tw_newWord;
     private Switch aSwitch;
     private boolean fbModeCenter = true;
     private FloatingActionButton fab;
@@ -48,6 +48,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Kelimelerim"));
+        tabLayout.addTab(tabLayout.newTab().setText("Alıştırmalar"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        final PagerAdapter adapter = new PagerAdapter
+                (getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         init();
 
@@ -69,16 +95,18 @@ public class MainActivity extends AppCompatActivity {
                     bar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_END);
                     fab.setImageResource(R.drawable.ic_arrow);
                     fbModeCenter = false;
-                    listView.setVisibility(View.GONE);
+                    tabLayout.setVisibility(View.GONE);
+                    Tab1Fragment.listView.setVisibility(View.GONE);
 
 //                    Intent intent = new Intent(getApplicationContext(), CreateNewActivity.class);
 //                    startActivity(intent);
                 } else {
                     Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
-                    listView.startAnimation(animation);
-                    listView.setVisibility(View.VISIBLE);
+                    Tab1Fragment.listView.startAnimation(animation);
+                    Tab1Fragment.listView.setVisibility(View.VISIBLE);
                     bar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_CENTER);
                     fab.setImageResource(R.drawable.ic_add_black_24dp);
+                    tabLayout.setVisibility(View.VISIBLE);
                     fbModeCenter = true;
                 }
             }
@@ -91,15 +119,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        this.listView.setNestedScrollingEnabled(true);
-        this.listView.setAdapter(customAdapter);
+        //this.listView.setNestedScrollingEnabled(true);
+        //this.listView.setAdapter(customAdapter);
 
-        this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), "Position : " + position, Toast.LENGTH_SHORT).show();
-            }
-        });
+//        this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(getBaseContext(), "Position : " + position, Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 
@@ -118,13 +146,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        this.tw_newWord = findViewById(R.id.tw_newWord);
         this.bar = findViewById(R.id.bar);
         setSupportActionBar(bar);
         this.aSwitch = findViewById(R.id.switch1);
         this.fab = findViewById(R.id.fab);
-        this.listView = findViewById(R.id.listView);
-        this.customAdapter = new CustomAdapter(this, getArrayList());
+//        this.listView = findViewById(R.id.listView);
+//        this.customAdapter = new CustomAdapter(this, getArrayList());
     }
 
     @Override
