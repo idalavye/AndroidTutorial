@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "981199809669",
+    "firebase_url": "https://androidfacebooklogin-2a847.firebaseio.com",
+    "project_id": "androidfacebooklogin-2a847",
+    "storage_bucket": "androidfacebooklogin-2a847.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981199809669:android:f0224cab2009fac7",
+        "android_client_info": {
+          "package_name": "wordmemory.idalavye.com.androidfacebooklogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981199809669-6hovfcp11ag17f3l850km1quouvfd6ch.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "wordmemory.idalavye.com.androidfacebooklogin",
+            "certificate_hash": "8903bc6f700a357fbaf27c30f8f7af11ed0d5a98"
+          }
+        },
+        {
+          "client_id": "981199809669-kdhqj9mnptv3p1qpig5nla8vu9ilbsmq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-obr5KY9BWX2ay6Poq_yyh-5zOffhQTA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "981199809669-kdhqj9mnptv3p1qpig5nla8vu9ilbsmq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
